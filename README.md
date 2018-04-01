@@ -6,3 +6,5 @@ virtualenv env
 source env/bin/activate
 ```
 
+### Install Crypto
+``` pip install pycryptodome ```

@@ -4,7 +4,7 @@ import hashlib
 from Crypto import Random
 from Crypto.Cipher import AES
 
-import http.client
+import requests
 
 class AESCipher(object):
     """
@@ -49,8 +49,10 @@ new_cipher = AESCipher(key='mykey')
 decrypted = new_cipher.decrypt(encrypted)
 print(decrypted)
 
+def send_post_request(data):
+    r = requests.post('http://127.0.0.1:8000',data)
 
-# HTTP Connection
-conn = http.client.HTTPConnection('', 8000)
-conn.request("GET", "/")
-r1 = conn.getresponse()
+    print(r.text)
+
+if __name__ == '__main__':
+    send_post_request(encrypted)
