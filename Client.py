@@ -45,8 +45,24 @@ cipher = AESCipher(key='mykey')
 encrypted = cipher.encrypt("hey")
 print(encrypted)
 
+cipher2 = AESCipher(key='mykey2')
+encrypted2 = cipher2.encrypt(encrypted)
+print(encrypted2)
+
+cipher3 = AESCipher(key='mykey3')
+encrypted3 = cipher3.encrypt(encrypted2)
+print(encrypted3)
+
+new_cipher3 = AESCipher(key='mykey3')
+decrypted3 = new_cipher3.decrypt(encrypted3)
+print(decrypted3)
+
+new_cipther2 = AESCipher(key='mykey2')
+decrypted2 = new_cipther2.decrypt(decrypted3)
+print(decrypted2)
+
 new_cipher = AESCipher(key='mykey')
-decrypted = new_cipher.decrypt(encrypted)
+decrypted = new_cipher.decrypt(decrypted2)
 print(decrypted)
 
 def send_post_request(data):
@@ -55,4 +71,4 @@ def send_post_request(data):
     print(r.text)
 
 if __name__ == '__main__':
-    send_post_request(encrypted)
+    send_post_request(encrypted3)
