@@ -43,27 +43,27 @@ class AESCipher(object):
 
 cipher = AESCipher(key='mykey')
 encrypted = cipher.encrypt("hey")
-print(encrypted)
+print("Encryption Layer 1: ",encrypted, '\n')
 
 cipher2 = AESCipher(key='mykey2')
 encrypted2 = cipher2.encrypt(encrypted)
-print(encrypted2)
+print("Encryption Layer 2: ", encrypted2, '\n')
 
 cipher3 = AESCipher(key='mykey3')
 encrypted3 = cipher3.encrypt(encrypted2)
-print(encrypted3)
+print("Encryption Layer 3: ", encrypted3, '\n')
 
 new_cipher3 = AESCipher(key='mykey3')
 decrypted3 = new_cipher3.decrypt(encrypted3)
-print(decrypted3)
+print("Decryption Layer 3: ", decrypted3, '\n')
 
 new_cipther2 = AESCipher(key='mykey2')
 decrypted2 = new_cipther2.decrypt(decrypted3)
-print(decrypted2)
+print("Decryption Layer 2: ", decrypted2, '\n')
 
 new_cipher = AESCipher(key='mykey')
 decrypted = new_cipher.decrypt(decrypted2)
-print(decrypted)
+print("Decryption Layer 1: ", decrypted, '\n')
 
 def send_post_request(data):
     r = requests.post('http://127.0.0.1:8000',data)
