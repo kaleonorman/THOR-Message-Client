@@ -5,6 +5,7 @@ from Crypto import Random
 from Crypto.Cipher import AES
 
 import requests
+import random
 
 class AESCipher(object):
     """
@@ -41,6 +42,11 @@ class AESCipher(object):
         cipher = AES.new(self.key, AES.MODE_CBC, iv)
         return self._unpad(cipher.decrypt(enc[AES.block_size:])).decode('utf-8')
 
+IP = ['http://127.0.0.1:8000', 'http://127.0.0.1:8001', ...
+'http://127.0.0.1:8002', 'http://127.0.0.1:8003']
+
+IP = random.shuffle(IP)
+
 cipher = AESCipher(key='mykey')
 encrypted = cipher.encrypt("hey")
 print("Encryption Layer 1: ",encrypted, '\n')
@@ -66,9 +72,12 @@ decrypted = new_cipher.decrypt(decrypted2)
 print("Decryption Layer 1: ", decrypted, '\n')
 
 def send_post_request(data):
-    r = requests.post('http://127.0.0.1:8000',data)
+    r = requests.post('http://127.0.0.1:8000', data)
+   
 
     print(r.text)
 
 if __name__ == '__main__':
     send_post_request(encrypted3)
+ #    send_post_request(decrypted)
+ 
