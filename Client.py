@@ -42,21 +42,25 @@ class AESCipher(object):
         cipher = AES.new(self.key, AES.MODE_CBC, iv)
         return self._unpad(cipher.decrypt(enc[AES.block_size:])).decode('utf-8')
 
-IP = ['http://127.0.0.1:8000', 'http://127.0.0.1:8001', ...
-'http://127.0.0.1:8002', 'http://127.0.0.1:8003']
+IP = [8000, 8001, 8002, 8003]
 
-IP = random.shuffle(IP)
+
+#random.shuffle(IP)
+
+Port1 = IP[1]
+Port2 = IP[2]
+Port3 = IP[3]
 
 cipher = AESCipher(key='mykey')
-encrypted = cipher.encrypt("hey")
+encrypted = cipher.encrypt("hey" + ' ' + str(Port1))
 print("Encryption Layer 1: ",encrypted, '\n')
 
 cipher2 = AESCipher(key='mykey2')
-encrypted2 = cipher2.encrypt(encrypted)
+encrypted2 = cipher2.encrypt(encrypted + ' ' + str(Port2))
 print("Encryption Layer 2: ", encrypted2, '\n')
 
 cipher3 = AESCipher(key='mykey3')
-encrypted3 = cipher3.encrypt(encrypted2)
+encrypted3 = cipher3.encrypt(encrypted2 + ' ' + str(Port3))
 print("Encryption Layer 3: ", encrypted3, '\n')
 
 new_cipher3 = AESCipher(key='mykey3')
@@ -65,7 +69,9 @@ print("Decryption Layer 3: ", decrypted3, '\n')
 
 new_cipther2 = AESCipher(key='mykey2')
 decrypted2 = new_cipther2.decrypt(decrypted3)
+split = decrypted2.split()
 print("Decryption Layer 2: ", decrypted2, '\n')
+decrypted2 = split[0]
 
 new_cipher = AESCipher(key='mykey')
 decrypted = new_cipher.decrypt(decrypted2)
