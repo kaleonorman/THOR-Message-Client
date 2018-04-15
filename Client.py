@@ -42,14 +42,20 @@ class AESCipher(object):
         cipher = AES.new(self.key, AES.MODE_CBC, iv)
         return self._unpad(cipher.decrypt(enc[AES.block_size:])).decode('utf-8')
 
-IP = [8000, 8001, 8002, 8003]
+Ports_file = open('/home/kaleo/Documents/Coding/THOR-Message-Server/IP.txt', 'r')
+IP = Ports_file.read()
+print(IP)
 
 
 #random.shuffle(IP)
 
-Port1 = IP[1]
-Port2 = IP[2]
-Port3 = IP[3]
+#f = open('IP.txt','w')
+#f.write(IP)
+#f.close()
+
+Port1 = IP[1:5]
+Port2 = IP[7:11]
+Port3 = IP[13:17]
 
 cipher = AESCipher(key='mykey')
 encrypted = cipher.encrypt("hey" + ' ' + str(Port1))
